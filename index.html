@@ -224,7 +224,7 @@ body{animation:fade .6s ease both}
     </div>
     <div id="sorter">
       <div class="fixrow">
-        <span class="hint" id="hint"><i aria-hidden="true"></i>These dots need an operator.</span>
+        <span class="hint" id="hint"><i aria-hidden="true"></i><span id="hintText">These dots need an operator.</span></span>
         <button class="toggle intro" id="toggle" type="button"><i aria-hidden="true"></i><span>Sort it out</span></button>
       </div>
       <p class="toast" id="toast" aria-live="polite"></p>
@@ -446,6 +446,7 @@ document.querySelectorAll('.count').forEach(el=>cio.observe(el));
 
 // hero field: scattered dots that sort themselves into a grid
 const cv=document.getElementById('field'),ctx=cv.getContext('2d'),btn=document.getElementById('toggle');
+let wasScared=false;const hintText=document.getElementById('hintText');
 let W,H,dpr,box,pts=[],sorted=false,mouse={x:-999,y:-999},running=true;
 const css=v=>getComputedStyle(document.documentElement).getPropertyValue(v).trim();
 function layout(){
@@ -468,17 +469,24 @@ function frame(){
   if(!running)return;
   ctx.clearRect(0,0,W,H);
   const muted=css('--muted'),acc=css('--accent'),line=css('--line');
+  // dots panic when the cursor gets close to the sort button
+  let fear=0,bx=0,by=0;
+  if(!sorted&&mouse.x>-900){const br=btn.getBoundingClientRect(),cr=cv.getBoundingClientRect();
+    bx=br.left+br.width/2-cr.left;by=br.top+br.height/2-cr.top;fear=Math.max(0,1-Math.hypot(mouse.x-bx,mouse.y-by)/260)}
+  const scared=fear>.45;if(scared!==wasScared){wasScared=scared;hintText.textContent=scared?'They know what\'s coming.':'These dots need an operator.'}
   for(const p of pts){
     if(sorted){ // orange dot lands first, the rest follow in a ripple around it
       if(performance.now()-sortAt>=p.delay){const k=p.hot?.03:.012;p.vx+=(p.gx-p.x)*k;p.vy+=(p.gy-p.y)*k}}
-    else{p.a+=(Math.random()-.5)*.3*level;p.vx+=Math.cos(p.a)*p.s*.08*level;p.vy+=Math.sin(p.a)*p.s*.08*level;
+    else{if(fear){const ex=p.x-bx,ey=p.y-by,ed=Math.hypot(ex,ey)+1,j=fear*3;
+        p.vx+=ex/ed*fear*1.2+(Math.random()-.5)*j;p.vy+=ey/ed*fear*1.2+(Math.random()-.5)*j}
+      p.a+=(Math.random()-.5)*.3*level;p.vx+=Math.cos(p.a)*p.s*.08*level;p.vy+=Math.sin(p.a)*p.s*.08*level;
       // level 1 stays near the grid; higher levels push dots away from where they belong
       const b={x0:0,y0:0,x1:W,y1:H};
       if(level>=2){const ex=p.x-box.cx,ey=p.y-box.cy,d=Math.hypot(ex,ey)+1,f=.04*(level-1);p.vx+=ex/d*f;p.vy+=ey/d*f}
       if(p.x<b.x0){p.x=b.x0;p.vx=Math.abs(p.vx)}if(p.x>b.x1){p.x=b.x1;p.vx=-Math.abs(p.vx)}
       if(p.y<b.y0){p.y=b.y0;p.vy=Math.abs(p.vy)}if(p.y>b.y1){p.y=b.y1;p.vy=-Math.abs(p.vy)}}
     const dx=p.x-mouse.x,dy=p.y-mouse.y,d2=dx*dx+dy*dy,dd=Math.sqrt(d2)+1;
-    if(!sorted&&mouse.x>-900&&p.s>.55){ // messy dots chase the cursor like flies
+    if(!sorted&&mouse.x>-900&&p.s>.55&&fear<.2){ // messy dots chase the cursor like flies
       const pull=Math.min(.04+.02*level,.12)*6;p.vx-=dx/dd*pull;p.vy-=dy/dd*pull;
       if(d2<1600){p.vx+=dx/dd*1.6;p.vy+=dy/dd*1.6}
       p.vx+=(Math.random()-.5)*.9;p.vy+=(Math.random()-.5)*.9}
