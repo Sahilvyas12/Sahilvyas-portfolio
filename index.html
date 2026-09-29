@@ -30,11 +30,11 @@ a{color:inherit}
 header{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--bg) 85%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid transparent;transition:border-color .3s}
 header.scrolled{border-color:var(--line)}
 nav{display:flex;justify-content:space-between;align-items:center;height:60px}
-.logo{display:inline-flex;align-items:center;gap:12px;text-decoration:none}
-.logo .mark{width:34px;height:34px;border-radius:50%;border:1px solid var(--fg);display:grid;place-items:center;font:italic 400 16px/1 var(--serif);padding-top:1px;transition:background .3s,color .3s}
-.logo .name{font:500 13px var(--sans);letter-spacing:.22em;text-transform:uppercase}
-.logo:hover .mark{background:var(--fg);color:var(--bg)}
-@media(max-width:520px){.logo .name{display:none}}
+.logo{font:600 18px/1 var(--sans);letter-spacing:-.03em;text-decoration:none}
+.logo span{color:var(--accent);transition:opacity .3s}
+.logo:hover span{opacity:.4}
+/* sort button sits under the dot grid on wide screens */
+@media(min-width:820px){.hero-inner{position:static}#sorter{position:absolute;z-index:3}#sorter .fixrow{margin-top:0}}
 /* fine grain for a printed, editorial feel */
 body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:50;opacity:.05;background-image:url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27160%27 height=%27160%27%3E%3Cfilter id=%27n%27%3E%3CfeTurbulence type=%27fractalNoise%27 baseFrequency=%27.9%27 numOctaves=%272%27 stitchTiles=%27stitch%27/%3E%3C/filter%3E%3Crect width=%27100%25%27 height=%27100%25%27 filter=%27url(%23n)%27/%3E%3C/svg%3E")}
 main{counter-reset:sec}
@@ -198,7 +198,7 @@ body{animation:fade .6s ease both}
 <div class="progress" id="progress" aria-hidden="true"></div>
 <header id="top">
   <nav class="wrap" aria-label="Main">
-    <a href="#top" class="logo" aria-label="Sahil Vyas, back to top"><span class="mark" aria-hidden="true">SV</span><span class="name">Sahil Vyas</span></a>
+    <a href="#top" class="logo">Sahil Vyas<span aria-hidden="true">.</span></a>
     <ul>
       <li><a href="#about">About</a></li>
       <li><a href="#work">Work</a></li>
@@ -215,17 +215,19 @@ body{animation:fade .6s ease both}
     <div class="hero-inner">
     <div class="who"><span class="dot" aria-hidden="true"></span><span><b>Sahil Vyas</b> · Operations Associate</span></div>
     <h1 id="headline" aria-label="I turn messy problems into things that work.">I turn <span class="messy" id="messy">messy</span> problems into things that <em>work.</em></h1>
-    <div class="fixrow">
-      <span class="hint" id="hint"><i aria-hidden="true"></i>These dots need an operator.</span>
-      <button class="toggle intro" id="toggle" type="button"><i aria-hidden="true"></i><span>Sort it out</span></button>
-    </div>
-    <p class="toast" id="toast" aria-live="polite"></p>
     <p class="sub">Operations, strategy, research and execution - with a bias toward getting things done.</p>
     <p class="tags">Operations<span>·</span>Strategy<span>·</span>Research<span>·</span>Execution</p>
     <div class="ctas">
       <a class="btn primary" href="#work">View My Work <span class="arrow" aria-hidden="true">→</span></a>
       <a class="btn ghost" href="#contact">Get In Touch</a>
       <a class="link" href="https://www.linkedin.com/in/sahil-vyas-625a8626a/" target="_blank" rel="noopener">LinkedIn ↗</a>
+    </div>
+    <div id="sorter">
+      <div class="fixrow">
+        <span class="hint" id="hint"><i aria-hidden="true"></i>These dots need an operator.</span>
+        <button class="toggle intro" id="toggle" type="button"><i aria-hidden="true"></i><span>Sort it out</span></button>
+      </div>
+      <p class="toast" id="toast" aria-live="polite"></p>
     </div>
     </div>
   </div>
@@ -450,9 +452,11 @@ function layout(){
   dpr=Math.min(devicePixelRatio||1,2);W=cv.offsetWidth;H=cv.offsetHeight;
   cv.width=W*dpr;cv.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);
   const wide=W>=820,cols=wide?10:8,rows=wide?10:12,gap=wide?Math.min(34,H/13):W/(cols+1);
-  const ox=wide?W-cols*gap-20:(W-(cols-1)*gap)/2,oy=wide?(H-(rows-1)*gap)/2:40;
+  const ox=wide?W-cols*gap-20:(W-(cols-1)*gap)/2,oy=wide?(H-(rows-1)*gap)/2-50:40;
   box={x0:ox-40,y0:oy-40,x1:ox+(cols-1)*gap+40,y1:oy+(rows-1)*gap+40};
   box.cx=(box.x0+box.x1)/2;box.cy=(box.y0+box.y1)/2;
+  const so=document.getElementById('sorter').style;
+  if(wide){so.left=ox+'px';so.top=(oy+(rows-1)*gap+30)+'px';so.width=Math.max((cols-1)*gap,300)+'px'}else so.left=so.top=so.width='';
   const old=pts;pts=[];
   for(let r=0;r<rows;r++)for(let c=0;c<cols;c++){
     const i=pts.length,p=old[i]||{x:Math.random()*W,y:Math.random()*H,vx:0,vy:0};
