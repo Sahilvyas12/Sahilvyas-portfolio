@@ -30,7 +30,15 @@ a{color:inherit}
 header{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--bg) 85%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid transparent;transition:border-color .3s}
 header.scrolled{border-color:var(--line)}
 nav{display:flex;justify-content:space-between;align-items:center;height:60px}
-.logo{font-family:var(--serif);font-size:22px;text-decoration:none}
+.logo{display:inline-flex;align-items:center;gap:12px;text-decoration:none}
+.logo .mark{width:34px;height:34px;border-radius:50%;border:1px solid var(--fg);display:grid;place-items:center;font:italic 400 16px/1 var(--serif);padding-top:1px;transition:background .3s,color .3s}
+.logo .name{font:500 13px var(--sans);letter-spacing:.22em;text-transform:uppercase}
+.logo:hover .mark{background:var(--fg);color:var(--bg)}
+@media(max-width:520px){.logo .name{display:none}}
+/* fine grain for a printed, editorial feel */
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:50;opacity:.05;background-image:url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27160%27 height=%27160%27%3E%3Cfilter id=%27n%27%3E%3CfeTurbulence type=%27fractalNoise%27 baseFrequency=%27.9%27 numOctaves=%272%27 stitchTiles=%27stitch%27/%3E%3C/filter%3E%3Crect width=%27100%25%27 height=%27100%25%27 filter=%27url(%23n)%27/%3E%3C/svg%3E")}
+main{counter-reset:sec}
+section .eyebrow::before{counter-increment:sec;content:counter(sec,decimal-leading-zero) "  /  ";color:var(--accent);white-space:pre}
 nav ul{display:flex;gap:4px;list-style:none}
 nav ul a{font-size:14px;color:var(--muted);text-decoration:none;padding:6px 10px;border-radius:6px;transition:color .2s}
 nav ul a:hover,nav ul a.active{color:var(--fg)}
@@ -48,7 +56,7 @@ section{padding:96px 0;border-top:1px solid var(--line)}
 .hero .who{display:flex;gap:12px;align-items:center;font-size:15px;color:var(--muted);margin-bottom:36px}
 .hero .who b{color:var(--fg);font-weight:600}
 .dot{width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px var(--accent-soft)}
-.hero h1{font-size:clamp(48px,10vw,112px);max-width:12ch}
+.hero h1{font-size:clamp(48px,10vw,112px);max-width:12ch;letter-spacing:-.025em}
 .hero p.sub{font-size:clamp(17px,2.2vw,20px);color:var(--muted);max-width:44ch;margin:28px 0 20px}
 .tags{font-size:14px;color:var(--fg);letter-spacing:.02em;margin-bottom:40px}
 .tags span{color:var(--accent);margin:0 6px}
@@ -190,7 +198,7 @@ body{animation:fade .6s ease both}
 <div class="progress" id="progress" aria-hidden="true"></div>
 <header id="top">
   <nav class="wrap" aria-label="Main">
-    <a href="#top" class="logo">Sahil Vyas</a>
+    <a href="#top" class="logo" aria-label="Sahil Vyas, back to top"><span class="mark" aria-hidden="true">SV</span><span class="name">Sahil Vyas</span></a>
     <ul>
       <li><a href="#about">About</a></li>
       <li><a href="#work">Work</a></li>
