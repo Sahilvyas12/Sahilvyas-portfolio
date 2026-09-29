@@ -1,0 +1,541 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sahil Vyas - Operations</title>
+<meta name="description" content="Sahil Vyas - Operations Associate. Operations, strategy, research and execution.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fafaf8; --fg:#111110; --muted:#6b6a66; --line:#e4e3de; --card:#ffffff;
+  --accent:#c2410c; --accent-soft:#c2410c14;
+  --serif:"Instrument Serif",Georgia,serif; --sans:"Inter",system-ui,sans-serif;
+  --max:1080px;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){--bg:#0f0f0e;--fg:#f2f1ec;--muted:#9a9993;--line:#262624;--card:#161615;--accent:#f97316;--accent-soft:#f9731618}
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{background:var(--bg);color:var(--fg);font:400 16px/1.65 var(--sans);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+::selection{background:var(--accent);color:#fff}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+
+/* nav */
+header{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--bg) 85%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid transparent;transition:border-color .3s}
+header.scrolled{border-color:var(--line)}
+nav{display:flex;justify-content:space-between;align-items:center;height:60px}
+.logo{font-family:var(--serif);font-size:22px;text-decoration:none}
+nav ul{display:flex;gap:4px;list-style:none}
+nav ul a{font-size:14px;color:var(--muted);text-decoration:none;padding:6px 10px;border-radius:6px;transition:color .2s}
+nav ul a:hover,nav ul a.active{color:var(--fg)}
+@media(max-width:520px){nav ul a{padding:6px 6px;font-size:13px}}
+
+/* type */
+.eyebrow{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:500}
+h1,h2,h3{font-weight:400;font-family:var(--serif);letter-spacing:-.01em;line-height:1.05}
+h2{font-size:clamp(36px,6vw,56px);margin:14px 0 40px}
+em{font-style:italic;color:var(--accent)}
+section{padding:96px 0;border-top:1px solid var(--line)}
+
+/* hero */
+.hero{padding:88px 20px 96px;border:0}
+.hero .who{display:flex;gap:12px;align-items:center;font-size:15px;color:var(--muted);margin-bottom:36px}
+.hero .who b{color:var(--fg);font-weight:600}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px var(--accent-soft)}
+.hero h1{font-size:clamp(48px,10vw,112px);max-width:12ch}
+.hero p.sub{font-size:clamp(17px,2.2vw,20px);color:var(--muted);max-width:44ch;margin:28px 0 20px}
+.tags{font-size:14px;color:var(--fg);letter-spacing:.02em;margin-bottom:40px}
+.tags span{color:var(--accent);margin:0 6px}
+.ctas{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.btn{display:inline-flex;align-items:center;gap:8px;height:46px;padding:0 22px;border-radius:999px;font-size:15px;font-weight:500;text-decoration:none;border:1px solid var(--fg);transition:transform .2s,background .2s,color .2s}
+.btn.primary{background:var(--fg);color:var(--bg)}
+.btn:hover{transform:translateY(-2px)}
+.btn.ghost:hover{background:var(--fg);color:var(--bg)}
+.link{font-size:14px;color:var(--muted);text-decoration:none;border-bottom:1px solid var(--line);margin-left:8px;transition:color .2s,border-color .2s}
+.link:hover{color:var(--fg);border-color:var(--fg)}
+.arrow{transition:transform .2s}
+a:hover .arrow{transform:translateX(3px)}
+
+/* about */
+.two{display:grid;gap:32px}
+@media(min-width:820px){.two{grid-template-columns:1fr 1.6fr;gap:64px}}
+.about p{font-size:clamp(18px,2.2vw,21px);line-height:1.6;margin-bottom:20px;max-width:34em}
+.about p.muted{color:var(--muted);font-size:17px}
+
+/* work */
+.cases{display:grid;gap:20px}
+.case{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:28px;transition:border-color .3s,transform .3s}
+.case:hover{border-color:color-mix(in srgb,var(--fg) 30%,var(--line))}
+@media(min-width:820px){.case{padding:48px}}
+.case-head{display:grid;gap:12px;margin-bottom:28px}
+@media(min-width:820px){.case-head{grid-template-columns:120px 1fr;gap:32px}}
+.num{font-family:var(--serif);font-size:20px;color:var(--accent)}
+.case h3{font-size:clamp(34px,5.5vw,56px)}
+.case .lede{color:var(--muted);font-size:17px;max-width:40em;margin-top:14px}
+.case-body{display:grid;gap:24px;border-top:1px solid var(--line);padding-top:28px}
+@media(min-width:820px){.case-body{grid-template-columns:120px 1fr;gap:32px}.case-body .grid{grid-column:2}}
+.grid{display:grid;gap:24px 40px}
+@media(min-width:640px){.grid{grid-template-columns:1fr 1fr}}
+.grid h4{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:500;margin-bottom:8px}
+.grid p{font-size:15.5px}
+.grid .wide{grid-column:1/-1}
+.flow{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:4px 0 0}
+.flow .pill{font-size:14px;border:1px solid var(--line);border-radius:999px;padding:6px 14px}
+.flow .pill.hot{border-color:var(--accent);color:var(--accent)}
+.metric{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;font-family:var(--serif);font-size:clamp(28px,4vw,40px)}
+.metric s{color:var(--muted);text-decoration-thickness:1px}
+.metric small{font-family:var(--sans);font-size:13px;color:var(--muted)}
+
+/* experience */
+.timeline{list-style:none;border-left:1px solid var(--line);margin-left:4px}
+.timeline li{position:relative;padding:0 0 44px 32px}
+.timeline li:last-child{padding-bottom:0}
+.timeline li::before{content:"";position:absolute;left:-5px;top:8px;width:9px;height:9px;border-radius:50%;background:var(--bg);border:1.5px solid var(--muted)}
+.timeline li.now::before{background:var(--accent);border-color:var(--accent);box-shadow:0 0 0 4px var(--accent-soft)}
+.timeline .when{font-size:13px;color:var(--muted);letter-spacing:.04em}
+.timeline h3{font-size:clamp(26px,3.5vw,34px);margin:6px 0 10px}
+.timeline p{color:var(--muted);max-width:36em}
+
+/* principles */
+.principles{display:grid;border-top:1px solid var(--line)}
+@media(min-width:720px){.principles{grid-template-columns:1fr 1fr}}
+.pr{padding:32px 0;border-bottom:1px solid var(--line);display:grid;grid-template-columns:44px 1fr;gap:8px}
+@media(min-width:720px){.pr{padding:40px 32px 40px 0}.pr:nth-child(even){padding-left:32px;border-left:1px solid var(--line)}}
+.pr .n{font-family:var(--serif);color:var(--accent);font-size:18px;line-height:1.6}
+.pr h3{font-size:clamp(26px,3.2vw,32px);margin-bottom:10px;transition:color .2s}
+.pr:hover h3{color:var(--accent)}
+.pr p{color:var(--muted);font-size:15.5px}
+
+/* interests */
+.interests{display:flex;flex-wrap:wrap;gap:4px 0;font-family:var(--serif);font-size:clamp(28px,5vw,48px);line-height:1.3}
+.interests span{padding-right:.5em}
+.interests span::after{content:"/";color:var(--line);padding-left:.5em}
+.interests span:last-child::after{content:""}
+.interests span:hover{color:var(--accent)}
+.note{color:var(--muted);font-size:15px;margin-top:28px;max-width:38em}
+
+/* resume + contact */
+.resume{display:flex;flex-wrap:wrap;gap:24px;justify-content:space-between;align-items:center}
+.resume h2{margin:0}
+.contact{padding:120px 0 72px}
+.contact h2{font-size:clamp(44px,8vw,92px);margin:0 0 20px;max-width:12ch}
+.contact .sub{font-size:20px;color:var(--muted);margin-bottom:40px}
+.contact .mail{font-family:var(--serif);font-size:clamp(24px,4vw,36px);text-decoration:none;border-bottom:1px solid var(--accent);display:inline-block;word-break:break-all}
+.mailrow{display:flex;flex-wrap:wrap;align-items:center;gap:14px;margin-bottom:32px}
+.copy{background:none;border:1px solid var(--line);color:var(--muted);font:500 13px var(--sans);padding:6px 12px;border-radius:999px;cursor:pointer;transition:color .2s,border-color .2s}
+.copy:hover{color:var(--fg);border-color:var(--fg)}
+.progress{position:fixed;top:0;left:0;height:2px;width:100%;background:var(--accent);transform-origin:0 50%;transform:scaleX(0);z-index:20;pointer-events:none}
+footer{border-top:1px solid var(--line);padding:28px 0;font-size:13px;color:var(--muted)}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+
+/* creative: hero system canvas */
+.hero{position:relative}
+#field{position:absolute;inset:0;width:100%;height:100%;z-index:2;opacity:.7;pointer-events:none}
+@media(min-width:820px){#field{opacity:1}}
+.hero-inner{position:relative}
+.toggle{margin-top:36px;display:inline-flex;align-items:center;gap:10px;background:none;border:1px dashed var(--line);color:var(--muted);font:500 13px var(--sans);padding:8px 14px;border-radius:999px;cursor:pointer;transition:color .2s,border-color .2s}
+.toggle:hover{color:var(--fg);border-color:var(--fg)}
+.toggle i{width:8px;height:8px;border-radius:2px;background:var(--accent);transition:transform .4s}
+.toggle[aria-pressed="true"] i{transform:rotate(45deg)}
+/* first state: headline scrambled, loud sort button */
+.fixrow{display:flex;flex-wrap:wrap;align-items:center;gap:12px 16px;margin-top:28px;min-height:40px}
+.fixrow .toggle{margin:0}
+.hint{display:inline-flex;align-items:center;gap:10px;font-size:15px;color:var(--muted);transition:opacity .4s}
+.hint i{width:8px;height:8px;border-radius:50%;background:var(--accent);animation:pulse 1.6s infinite}
+.hint.gone{display:none}
+@keyframes pulse{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--accent) 50%,transparent)}70%,100%{box-shadow:0 0 0 8px transparent}}
+.toggle.intro{background:var(--fg);border:1px solid var(--fg);color:var(--bg);font-size:14px;font-weight:600;padding:10px 18px}
+.toggle.intro i{background:var(--accent)}
+.toggle.intro:hover{background:var(--accent);border-color:var(--accent);color:#fff}
+.hero h1 .hw{display:inline-block;white-space:nowrap;transition:color .6s}
+.hero h1.scrambled .hw{color:color-mix(in srgb,var(--fg) 55%,var(--bg))}
+.hero h1.scrambled em{color:inherit}
+.toast{display:block;margin-top:14px;font-size:15px;color:var(--fg);min-height:1.6em;opacity:0;transform:translateY(6px);transition:opacity .4s,transform .4s}
+.toast.show{opacity:1;transform:none}
+.toast.err{display:inline-block;border:1px solid var(--accent);background:var(--accent-soft);padding:8px 14px;border-radius:10px}
+.toast.err b{color:var(--accent);font-weight:600}
+.shake{animation:shake .4s}
+@keyframes shake{20%,60%{transform:translateX(-5px)}40%,80%{transform:translateX(5px)}}
+.toast a{color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent);white-space:nowrap}
+/* messy word */
+.messy{display:inline-block;white-space:nowrap;cursor:default}
+.messy span{display:inline-block;transition:transform .6s cubic-bezier(.2,.8,.2,1)}
+.messy.sorted span{transform:none!important}
+/* counter + delivery bars */
+.count{font-variant-numeric:tabular-nums}
+.bars{display:grid;gap:14px;margin-top:6px}
+.bar{display:grid;grid-template-columns:78px 1fr;align-items:center;gap:14px;font-size:13px;color:var(--muted)}
+.bar .track{height:12px;border-radius:99px;background:var(--accent-soft);overflow:hidden}
+.bar .fill{height:100%;border-radius:99px;background:var(--muted);width:100%;transition:width 1.6s cubic-bezier(.6,0,.2,1) .3s}
+.bar.after .fill{background:var(--accent)}
+.case.in .bar.after .fill{width:3.6%}
+.bars .cap{font-size:13px;color:var(--muted);margin-top:4px}
+
+/* motion */
+.reveal{opacity:0;transform:translateY(16px);transition:opacity .7s ease,transform .7s ease}
+.reveal.in{opacity:1;transform:none}
+body{animation:fade .6s ease both}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}.reveal{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<div class="progress" id="progress" aria-hidden="true"></div>
+<header id="top">
+  <nav class="wrap" aria-label="Main">
+    <a href="#top" class="logo">Sahil Vyas</a>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <!-- HERO -->
+  <div class="hero wrap">
+    <canvas id="field" aria-hidden="true"></canvas>
+    <div class="hero-inner">
+    <div class="who"><span class="dot" aria-hidden="true"></span><span><b>Sahil Vyas</b> · Operations Associate</span></div>
+    <h1 id="headline" aria-label="I turn messy problems into things that work.">I turn <span class="messy" id="messy">messy</span> problems into things that <em>work.</em></h1>
+    <div class="fixrow">
+      <span class="hint" id="hint"><i aria-hidden="true"></i>These dots need an operator.</span>
+      <button class="toggle intro" id="toggle" type="button"><i aria-hidden="true"></i><span>Sort it out</span></button>
+    </div>
+    <p class="toast" id="toast" aria-live="polite"></p>
+    <p class="sub">Operations, strategy, research and execution - with a bias toward getting things done.</p>
+    <p class="tags">Operations<span>·</span>Strategy<span>·</span>Research<span>·</span>Execution</p>
+    <div class="ctas">
+      <a class="btn primary" href="#work">View My Work <span class="arrow" aria-hidden="true">→</span></a>
+      <a class="btn ghost" href="#contact">Get In Touch</a>
+      <a class="link" href="https://www.linkedin.com/in/sahil-vyas-625a8626a/" target="_blank" rel="noopener">LinkedIn ↗</a>
+    </div>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="wrap two reveal">
+      <div><p class="eyebrow">About</p><h2>A little about me</h2></div>
+      <div class="about">
+        <p>I work in operations. The part I enjoy most is the stuff that doesn't have a playbook yet - where the problem is fuzzy, nobody owns it fully, and someone has to figure out what "done" even looks like.</p>
+        <p>That usually means sitting between teams, finding what's actually slowing things down, and turning a rough idea into a process people can run.</p>
+        <p class="muted">I'm most interested in business operations, process improvement, strategy, research, cross-functional execution, and building things from zero.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- WORK -->
+  <section id="work">
+    <div class="wrap">
+      <div class="reveal"><p class="eyebrow">Selected work</p><h2>Things I've worked on</h2></div>
+      <div class="cases">
+
+        <!-- 01 -->
+        <article class="case reveal">
+          <div class="case-head">
+            <span class="num">01</span>
+            <div>
+              <h3>Building a business from 0 → $20K</h3>
+              <p class="lede">A sector that didn't exist yet. I worked closely with the business to build it from the ground up to roughly $20K in business.</p>
+            </div>
+          </div>
+          <div class="case-body">
+            <div class="grid">
+              <div><h4>The problem</h4><p>Start a new line of business with no existing customers, process or playbook to copy from.</p></div>
+              <div><h4>My role</h4><p>Worked closely with the business and leadership to take the sector from idea to revenue.</p></div>
+              <div><h4>What I did</h4><p><!-- EDIT: add 2-3 specific things you did -->Helped shape how the sector would run, and did the hands-on work to get it moving from day one.</p></div>
+              <div><h4>Key decisions</h4><p><!-- EDIT: add the real calls you made -->Where to focus first, what to test small, and what to leave out until it was proven.</p></div>
+              <div class="wide"><h4>Outcome</h4><div class="metric"><span>$0</span><span aria-hidden="true">→</span><span>~$<span class="count" data-to="20">0</span>K</span><small>in business, built from zero</small></div></div>
+              <div class="wide"><h4>Lessons learned</h4><p><!-- EDIT: your own lesson -->Early on, speed of learning matters more than polish. The first version just has to be good enough to tell you what to fix next.</p></div>
+            </div>
+          </div>
+        </article>
+
+        <!-- 02 -->
+        <article class="case reveal">
+          <div class="case-head">
+            <span class="num">02</span>
+            <div>
+              <h3>1–2 weeks → ~12 hours</h3>
+              <p class="lede">Delivery time was a key operational metric. I worked on cutting it from one to two weeks down to about twelve hours.</p>
+            </div>
+          </div>
+          <div class="case-body">
+            <div class="grid">
+              <div><h4>Existing process</h4><p><!-- EDIT: describe the old steps -->Delivery took one to two weeks from start to finish.</p></div>
+              <div><h4>Bottleneck</h4><p><!-- EDIT: name the real bottleneck -->Mapped the process end-to-end to find where work was actually waiting, rather than guessing.</p></div>
+              <div><h4>Changes made</h4><p><!-- EDIT: list what you changed -->Reworked the steps around the bottleneck so work kept moving.</p></div>
+              <div><h4>New process</h4>
+                <div class="flow"><span class="pill">Request</span><span aria-hidden="true">→</span><span class="pill hot">Streamlined handoff</span><span aria-hidden="true">→</span><span class="pill">Delivered</span></div>
+              </div>
+              <div class="wide"><h4>Result</h4><div class="metric"><s>1–2 weeks</s><span aria-hidden="true">→</span><span>~12 hours</span><small>delivery time</small></div>
+                <div class="bars" aria-hidden="true">
+                  <div class="bar"><span>Before</span><div class="track"><div class="fill"></div></div></div>
+                  <div class="bar after"><span>After</span><div class="track"><div class="fill"></div></div></div>
+                  <p class="cap">Drawn to scale: ~12 hours against two weeks.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- 03 -->
+        <article class="case reveal">
+          <div class="case-head">
+            <span class="num">03</span>
+            <div>
+              <h3>From ambiguity to execution</h3>
+              <p class="lede">My responsibilities changed as the business needed them to. Each move meant learning a new function fast and still shipping.</p>
+            </div>
+          </div>
+          <div class="case-body">
+            <div class="grid">
+              <div class="wide"><h4>Functions I've worked across</h4>
+                <div class="flow"><span class="pill">Product</span><span class="pill">Operations</span><span class="pill">Marketing / Outbound</span><span class="pill">Inbound</span><span class="pill">Content</span></div>
+              </div>
+              <div><h4>The challenge</h4><p>Moving between functions means starting again each time: new goals, new people, new ways of measuring success.</p></div>
+              <div><h4>How I approached it</h4><p>Learn how the function works, find where it's stuck, and get something useful out the door before trying to perfect it.</p></div>
+              <div class="wide"><h4>What it taught me</h4><p>How the parts of a business connect. A product decision shows up in operations, an ops problem shows up in marketing. Seeing that from the inside is the most useful thing I've learned.</p></div>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="wrap two reveal">
+      <div><p class="eyebrow">Experience</p><h2>Where I've been</h2></div>
+      <ol class="timeline">
+        <li class="now">
+          <span class="when">Current</span>
+          <h3>Operations Associate</h3>
+          <p>Running and improving day-to-day operations, working closely with leadership.</p>
+        </li>
+        <li>
+          <span class="when">Previously</span>
+          <h3>Product / Operations / Growth &amp; Business Operations</h3>
+          <p>Worked closely with founders and senior leadership, with hands-on exposure to product, operations, outbound, inbound and content.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- PRINCIPLES -->
+  <section id="principles">
+    <div class="wrap">
+      <div class="reveal"><p class="eyebrow">How I work</p><h2>My operating principles</h2></div>
+      <div class="principles reveal">
+        <div class="pr"><span class="n">01</span><div><h3>Find the bottleneck.</h3><p>Understand what is actually slowing the system down before trying to fix it.</p></div></div>
+        <div class="pr"><span class="n">02</span><div><h3>Start with the smallest useful version.</h3><p>Don't overbuild before proving that something works.</p></div></div>
+        <div class="pr"><span class="n">03</span><div><h3>Measure what matters.</h3><p>Focus on outcomes and operational metrics, not activity.</p></div></div>
+        <div class="pr"><span class="n">04</span><div><h3>Own the problem.</h3><p>If something is broken, understand it end-to-end instead of waiting for someone else to fix it.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTERESTS -->
+  <section id="interests">
+    <div class="wrap reveal">
+      <p class="eyebrow">What I'm interested in</p>
+      <h2 style="margin-bottom:32px">The problems I want more of</h2>
+      <p class="interests"><span>Operations</span><span>Business Strategy</span><span>Research</span><span>Process Improvement</span><span>Founder's Office</span><span>Go-to-Market</span><span>New Business / 0→1</span></p>
+      <p class="note">Not a list of badges. These are the areas I'm spending my time on and want to go deeper in.</p>
+    </div>
+  </section>
+
+  <!-- RESUME -->
+  <section id="resume">
+    <div class="wrap resume reveal">
+      <h2>Want the full picture?</h2>
+      <div class="ctas">
+        <a class="btn primary" href="resume.pdf" download>Download Resume <span class="arrow" aria-hidden="true">↓</span></a>
+        <a class="btn ghost" href="https://www.linkedin.com/in/sahil-vyas-625a8626a/" target="_blank" rel="noopener">LinkedIn ↗</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="contact">
+    <div class="wrap reveal">
+      <p class="eyebrow">Contact</p>
+      <h2 style="margin-top:14px">Have a problem worth <em>solving?</em></h2>
+      <p class="sub">Let's talk.</p>
+      <div class="mailrow">
+        <a class="mail" href="mailto:minapearls86@gmail.com">minapearls86@gmail.com</a>
+        <button class="copy" id="copy" type="button">Copy</button>
+      </div>
+      <div class="ctas">
+        <a class="btn primary" href="mailto:minapearls86@gmail.com">Email me <span class="arrow" aria-hidden="true">→</span></a>
+        <a class="btn ghost" href="https://www.linkedin.com/in/sahil-vyas-625a8626a/" target="_blank" rel="noopener">LinkedIn ↗</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer><div class="wrap"><span>© <span id="y"></span> Sahil Vyas</span><a class="link" href="#top" style="margin:0">Back to top ↑</a></div></footer>
+
+<script>
+document.getElementById('y').textContent=new Date().getFullYear();
+
+// scroll progress bar
+const bar=document.getElementById('progress');
+addEventListener('scroll',()=>{const d=document.documentElement;bar.style.transform=`scaleX(${d.scrollTop/(d.scrollHeight-d.clientHeight)||0})`},{passive:true});
+
+// copy email
+const cp=document.getElementById('copy');
+cp.addEventListener('click',async()=>{
+  try{await navigator.clipboard.writeText('minapearls86@gmail.com');cp.textContent='Copied. Talk soon.'}
+  catch{cp.textContent='Select and copy the address'}
+  setTimeout(()=>cp.textContent='Copy',2500);
+});
+
+// tab title when visitors switch away
+const baseTitle=document.title;
+document.addEventListener('visibilitychange',()=>{document.title=document.hidden?'Still messy? Come back.':baseTitle});
+
+// a note for anyone who opens the console
+console.log('%cCurious enough to open the console?','font:600 14px sans-serif');
+console.log('That is exactly the kind of person I like working with. Say hi: minapearls86@gmail.com');
+const h=document.querySelector('header');
+addEventListener('scroll',()=>h.classList.toggle('scrolled',scrollY>10),{passive:true});
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+const links=[...document.querySelectorAll('nav ul a')];
+const so=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)links.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+e.target.id))}),{rootMargin:'-45% 0px -50% 0px'});
+['work','experience','about','contact'].forEach(id=>so.observe(document.getElementById(id)));
+
+const still=matchMedia('(prefers-reduced-motion:reduce)').matches;
+
+// "messy" word: jumbled letters that settle
+const m=document.getElementById('messy');
+m.innerHTML=[...m.textContent].map(c=>`<span>${c}</span>`).join('');
+const jumble=()=>{}; // word jumble switched off for now
+const jumbleLetters=k=>m.querySelectorAll('span').forEach(s=>s.style.transform=k?`translate(${(Math.random()-.5)*4*k|0}px,${(Math.random()-.5)*10*k|0}px) rotate(${(Math.random()-.5)*18*k|0}deg)`:'');
+
+// count-up on case 01
+const cio=new IntersectionObserver(es=>es.forEach(e=>{
+  if(!e.isIntersecting)return;cio.unobserve(e.target);
+  const el=e.target,to=+el.dataset.to,t0=performance.now(),d=still?0:1400;
+  const step=t=>{const p=d?Math.min((t-t0)/d,1):1;el.textContent=Math.round(to*(1-Math.pow(1-p,3)));if(p<1)requestAnimationFrame(step)};
+  requestAnimationFrame(step);
+}),{threshold:.6});
+document.querySelectorAll('.count').forEach(el=>cio.observe(el));
+
+// hero field: scattered dots that sort themselves into a grid
+const cv=document.getElementById('field'),ctx=cv.getContext('2d'),btn=document.getElementById('toggle');
+let W,H,dpr,box,pts=[],sorted=false,mouse={x:-999,y:-999},running=true;
+const css=v=>getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+function layout(){
+  dpr=Math.min(devicePixelRatio||1,2);W=cv.offsetWidth;H=cv.offsetHeight;
+  cv.width=W*dpr;cv.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);
+  const wide=W>=820,cols=wide?10:8,rows=wide?10:12,gap=wide?Math.min(34,H/13):W/(cols+1);
+  const ox=wide?W-cols*gap-20:(W-(cols-1)*gap)/2,oy=wide?(H-(rows-1)*gap)/2:40;
+  box={x0:ox-40,y0:oy-40,x1:ox+(cols-1)*gap+40,y1:oy+(rows-1)*gap+40};
+  box.cx=(box.x0+box.x1)/2;box.cy=(box.y0+box.y1)/2;
+  const old=pts;pts=[];
+  for(let r=0;r<rows;r++)for(let c=0;c<cols;c++){
+    const i=pts.length,p=old[i]||{x:Math.random()*W,y:Math.random()*H,vx:0,vy:0};
+    p.gx=ox+c*gap;p.gy=oy+r*gap;p.hot=(r===Math.floor(rows/2)&&c===cols-3);
+    p.a=Math.random()*6.28;p.s=.3+Math.random()*.6;pts.push(p);
+  }
+}
+function frame(){
+  if(!running)return;
+  ctx.clearRect(0,0,W,H);
+  const muted=css('--muted'),acc=css('--accent'),line=css('--line');
+  for(const p of pts){
+    if(sorted){ // orange dot lands first, the rest follow in a ripple around it
+      if(performance.now()-sortAt>=p.delay){const k=p.hot?.03:.012;p.vx+=(p.gx-p.x)*k;p.vy+=(p.gy-p.y)*k}}
+    else{p.a+=(Math.random()-.5)*.3*level;p.vx+=Math.cos(p.a)*p.s*.08*level;p.vy+=Math.sin(p.a)*p.s*.08*level;
+      // level 1 stays near the grid; higher levels push dots away from where they belong
+      const b={x0:0,y0:0,x1:W,y1:H};
+      if(level>=2){const ex=p.x-box.cx,ey=p.y-box.cy,d=Math.hypot(ex,ey)+1,f=.04*(level-1);p.vx+=ex/d*f;p.vy+=ey/d*f}
+      if(p.x<b.x0){p.x=b.x0;p.vx=Math.abs(p.vx)}if(p.x>b.x1){p.x=b.x1;p.vx=-Math.abs(p.vx)}
+      if(p.y<b.y0){p.y=b.y0;p.vy=Math.abs(p.vy)}if(p.y>b.y1){p.y=b.y1;p.vy=-Math.abs(p.vy)}}
+    const dx=p.x-mouse.x,dy=p.y-mouse.y,d2=dx*dx+dy*dy,dd=Math.sqrt(d2)+1;
+    if(!sorted&&mouse.x>-900&&p.s>.55){ // messy dots chase the cursor like flies
+      const pull=Math.min(.04+.02*level,.12)*6;p.vx-=dx/dd*pull;p.vy-=dy/dd*pull;
+      if(d2<1600){p.vx+=dx/dd*1.6;p.vy+=dy/dd*1.6}
+      p.vx+=(Math.random()-.5)*.9;p.vy+=(Math.random()-.5)*.9}
+    else if(d2<6400){const f=(6400-d2)/6400*1.2;p.vx+=dx/dd*f;p.vy+=dy/dd*f}
+    p.vx*=.9;p.vy*=.9;p.x+=p.vx;p.y+=p.vy;
+  }
+  if(sorted){ctx.strokeStyle=line;ctx.lineWidth=1;ctx.beginPath();
+    for(let i=0;i<pts.length-1;i++){const a=pts[i],b=pts[i+1];if(Math.abs(a.gy-b.gy)<1){ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y)}}ctx.stroke()}
+  for(const p of pts){ctx.fillStyle=p.hot?acc:muted;ctx.beginPath();ctx.arc(p.x,p.y,p.hot?5:2.6,0,6.28);ctx.fill()}
+  requestAnimationFrame(frame);
+}
+// 0 = sorted. "Make it messy" scatters the dots. "Sort it out" never works:
+// it shows an error and scatters them further from the grid each time.
+const MAX=6,toast=document.getElementById('toast'),cta=' <a href="#contact">Let\'s talk →</a>';
+const errs=[
+  'You need help with this.',
+  'Still not sorted. You need help with this.',
+  'It\'s getting worse. You really need help with this.',
+  'Okay, stop. You need Sahil for this.'
+];
+let level=0,tries=0,tt,sortAt=0;
+function say(html,err){toast.classList.remove('show');clearTimeout(tt);
+  setTimeout(()=>{toast.innerHTML=html;toast.classList.toggle('err',!!err);toast.classList.add('show')},150);
+  tt=setTimeout(()=>toast.classList.remove('show'),8000)}
+function setLevel(l){
+  level=l;sorted=l===0;
+  if(sorted){sortAt=performance.now();const h=pts.find(p=>p.hot);pts.forEach(p=>p.delay=p.hot?0:450+Math.hypot(p.gx-h.gx,p.gy-h.gy)*4)}
+  btn.querySelector('span').textContent=sorted?'Make it messy':'Sort it out';
+  m.classList.toggle('sorted',sorted);jumble(Math.min(l,4));
+  if(l)for(const p of pts){const a=Math.random()*6.28,k=3+l*3;p.vx+=Math.cos(a)*k;p.vy+=Math.sin(a)*k}
+}
+// headline starts scrambled; the first click sorts it (and the dots) for real
+// headline words start in the wrong order; the first click glides them into place
+const hd=document.getElementById('headline'),hint=document.getElementById('hint');
+const parts=['I','turn',m,'problems','into','things','that',hd.querySelector('em')];
+const words=parts.map(p=>{const s=document.createElement('span');s.className='hw';s.setAttribute('aria-hidden','true');
+  typeof p==='string'?s.textContent=p:s.append(p);return s});
+const MIXED=[3,7,0,5,2,6,1,4]; // "problems work. I things messy that turn into"
+const tilt=()=>`translateY(${(Math.random()-.5)*14|0}px) rotate(${(Math.random()-.5)*10|0}deg)`;
+function arrange(order,mixed,animate){
+  const before=words.map(w=>w.getBoundingClientRect());
+  hd.replaceChildren();order.forEach((i,k)=>{if(k)hd.append(' ');hd.append(words[i])});
+  hd.classList.toggle('scrambled',mixed);
+  words.forEach((w,i)=>{
+    const end=mixed?tilt():'none',from=w.dataset.t||'';w.style.transform=end;w.dataset.t=end==='none'?'':end;
+    if(!animate)return;
+    const a=before[i],b=w.getBoundingClientRect();
+    w.animate([{transform:`translate(${a.left-b.left}px,${a.top-b.top}px) ${from}`},{transform:end==='none'?'translate(0,0)':end}],
+      {duration:900,delay:order.indexOf(i)*70,easing:'cubic-bezier(.2,.8,.2,1)',fill:'backwards'});
+  });
+}
+let intro=!still;
+arrange([0,1,2,3,4,5,6,7],false,false); // words stay in order for now; only the dots start messy
+btn.addEventListener('click',()=>{
+  if(intro){intro=false;setLevel(0);
+    btn.classList.remove('intro');hint.classList.add('gone');
+    setTimeout(()=>say('Sorted. That\'s what I do with real problems.'+cta),900);return}
+  if(sorted){setLevel(1);return}
+  setLevel(Math.min(level+1,MAX));
+  say('<b>Error:</b> '+errs[Math.min(tries++,errs.length-1)]+cta,true);
+  btn.classList.remove('shake');void btn.offsetWidth;btn.classList.add('shake');
+});
+['pointermove','pointerdown'].forEach(t=>addEventListener(t,e=>{const r=cv.getBoundingClientRect();mouse.x=e.clientX-r.left;mouse.y=e.clientY-r.top},{passive:true}));
+addEventListener('resize',layout);
+new IntersectionObserver(([e])=>{const was=running;running=e.isIntersecting;if(running&&!was)frame()}).observe(cv);
+layout();
+if(intro){setLevel(2)}
+else{pts.forEach(p=>{p.x=p.gx;p.y=p.gy});setLevel(0)}
+frame();
+</script>
+</body>
+</html>
