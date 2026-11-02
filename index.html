@@ -464,21 +464,26 @@ function layout(){
     p.gx=ox+c*gap;p.gy=oy+r*gap;p.hot=(r===Math.floor(rows/2)&&c===cols-3);
     p.a=Math.random()*6.28;p.s=.3+Math.random()*.6;pts.push(p);
   }
+  // 42 guards in 3 rows of 14; the orange dot takes the middle of the front row
+  let gi=0;pts.forEach((p,i)=>{p.g=-1;if(!p.hot&&i%2===0&&gi<41){if(gi===7)gi++;p.g=gi++}});
+  pts.find(p=>p.hot).g=7;
 }
 function frame(){
   if(!running)return;
   ctx.clearRect(0,0,W,H);
   const muted=css('--muted'),acc=css('--accent'),line=css('--line');
   // dots panic when the cursor gets close to the sort button
-  let fear=0,bx=0,by=0;
+  let fear=0,bx=0,by=0,md=999;
   if(!sorted&&mouse.x>-900){const br=btn.getBoundingClientRect(),cr=cv.getBoundingClientRect();
-    bx=br.left+br.width/2-cr.left;by=br.top+br.height/2-cr.top;fear=Math.max(0,1-Math.hypot(mouse.x-bx,mouse.y-by)/260)}
-  const scared=fear>.45;if(scared!==wasScared){wasScared=scared;hintText.textContent=scared?'They know what\'s coming.':'These dots need an operator.'}
+    bx=br.left+br.width/2-cr.left;by=br.top+br.height/2-cr.top;md=Math.hypot(mouse.x-bx,mouse.y-by);fear=Math.max(0,1-md/260)}
+  const scared=fear>.3;if(scared!==wasScared){wasScared=scared;hintText.textContent=scared?'They\'re trying to stop you.':'These dots need an operator.'}
   for(const p of pts){
     if(sorted){ // orange dot lands first, the rest follow in a ripple around it
       if(performance.now()-sortAt>=p.delay){const k=p.hot?.03:.012;p.vx+=(p.gx-p.x)*k;p.vy+=(p.gy-p.y)*k}}
-    else{if(fear){const ex=p.x-bx,ey=p.y-by,ed=Math.hypot(ex,ey)+1,j=fear*3;
-        p.vx+=ex/ed*fear*1.2+(Math.random()-.5)*j;p.vy+=ey/ed*fear*1.2+(Math.random()-.5)*j}
+    else{if(fear&&p.g>=0){ // guards form a wall between the cursor and the button
+        const K=14,ang=Math.atan2(mouse.y-by,mouse.x-bx)+((p.g%K)/(K-1)-.5)*1.8;
+        const rad=Math.min(Math.max(md*.55,22),95)+Math.floor(p.g/K)*11,tx=bx+Math.cos(ang)*rad,ty=by+Math.sin(ang)*rad;
+        p.vx+=(tx-p.x)*.06*fear+(Math.random()-.5)*fear*1.5;p.vy+=(ty-p.y)*.06*fear+(Math.random()-.5)*fear*1.5}
       p.a+=(Math.random()-.5)*.3*level;p.vx+=Math.cos(p.a)*p.s*.08*level;p.vy+=Math.sin(p.a)*p.s*.08*level;
       // level 1 stays near the grid; higher levels push dots away from where they belong
       const b={x0:0,y0:0,x1:W,y1:H};
